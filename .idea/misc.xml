@@ -6,6 +6,8 @@
         <entry key="..\:/AndroidProjects/libraries/WiproCodingAssessment/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/libraries/WiproCodingAssessment/app/src/main/res/layout/activity_main.xml" value="0.2359375" />
         <entry key="..\:/AndroidProjects/libraries/WiproCodingAssessment/app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />
+        <entry key="..\:/AndroidProjects/libraries/WiproCodingAssessment/app/src/main/res/layout/inflate_facts_item.xml" value="0.25" />
+        <entry key="..\:/AndroidProjects/libraries/WiproCodingAssessment/app/src/main/res/layout/inflate_user_item.xml" value="0.25" />
       </map>
     </option>
   </component>

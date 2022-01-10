@@ -14,7 +14,7 @@ class SplashScreenViewModel:ViewModel() {
 
     private val navigateToScreen:MutableLiveData<Class<*>> = MutableLiveData()
 
-    fun getNavigateToScreen():LiveData<Class<*>>{
+    fun navigateToScreenObservable():LiveData<Class<*>>{
         return navigateToScreen
     }
 

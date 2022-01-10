@@ -32,7 +32,7 @@ class SplashScreenActivity : AppCompatActivity() {
         Add observers in this method
      */
     private fun addObservers() {
-        mViewModel?.getNavigateToScreen()?.observe(this, { splashScreen ->
+        mViewModel?.navigateToScreenObservable()?.observe(this, { splashScreen ->
             startActivity(Intent(this, splashScreen))
             finishAffinity()
         })
