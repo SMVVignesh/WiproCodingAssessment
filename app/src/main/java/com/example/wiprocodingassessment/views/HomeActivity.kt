@@ -1,6 +1,7 @@
 package com.example.wiprocodingassessment.views
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -10,6 +11,7 @@ import com.example.wiprocodingassessment.R
 import com.example.wiprocodingassessment.adapter.FactsAdapter
 import com.example.wiprocodingassessment.databinding.ActivityHomeBinding
 import com.example.wiprocodingassessment.viewmodels.HomeViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class HomeActivity : AppCompatActivity() {
     private var mViewDataBinding: ActivityHomeBinding? = null
@@ -19,12 +21,20 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initDataBinding()
+        setUpSwipeRefresh()
         setUpRecyclerView()
         addObservers()
     }
 
+    private fun setUpSwipeRefresh() {
+        mViewDataBinding?.sRLFacts?.setOnRefreshListener {
+                callFactsApi()
+        }
+    }
+
     private fun callFactsApi() {
-        mViewModel?.getFacts()
+        Log.e("API_CALLED", "FACTS CALLED")
+        mViewModel?.getFacts(true)
     }
 
     private fun setUpRecyclerView() {
@@ -45,13 +55,20 @@ class HomeActivity : AppCompatActivity() {
         mViewModel?.loadingObservable()?.observe(this, { showLoading ->
             mViewDataBinding?.pBFacts?.visibility = if (showLoading) View.VISIBLE else View.GONE
         })
-        mViewModel?.messageObservable()?.observe(this, {
-
-
+        mViewModel?.pullToRefreshObservable()?.observe(this, { showLoading ->
+            mViewDataBinding?.sRLFacts?.isRefreshing = showLoading
+        })
+        mViewModel?.messageObservable()?.observe(this, { message ->
+            showErrorMessage(message)
         })
         mViewModel?.factsObservable()?.observe(this, {
             mViewDataBinding?.txtTitle?.text = it.title
             userAdapter?.updateList(it.rows ?: ArrayList())
         })
+    }
+
+    private fun showErrorMessage(message: String?) {
+        Snackbar.make(findViewById(android.R.id.content), message ?: "", Snackbar.LENGTH_LONG)
+            .show()
     }
 }
