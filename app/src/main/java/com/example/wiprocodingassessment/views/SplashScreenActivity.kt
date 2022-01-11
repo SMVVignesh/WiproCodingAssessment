@@ -20,8 +20,8 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     /*
-        To Bind the data
-     */
+      Initialize Data Binding
+   */
     private fun initDataBinding() {
         mViewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash_screen)
         mViewDataBinding?.lifecycleOwner = this
@@ -29,7 +29,7 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     /*
-        Add observers in this method
+        Adding LiveData Observers
      */
     private fun addObservers() {
         mViewModel?.navigateToScreenObservable()?.observe(this, { splashScreen ->

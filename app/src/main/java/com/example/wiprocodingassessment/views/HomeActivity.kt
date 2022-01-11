@@ -26,17 +26,26 @@ class HomeActivity : AppCompatActivity() {
         addObservers()
     }
 
+    /*
+        Adding Refresh Listener
+     */
     private fun setUpSwipeRefresh() {
         mViewDataBinding?.sRLFacts?.setOnRefreshListener {
-                callFactsApi()
+            callFactsApi()
         }
     }
 
+    /*
+        Call Facts Api
+     */
     private fun callFactsApi() {
         Log.e("API_CALLED", "FACTS CALLED")
         mViewModel?.getFacts(true)
     }
 
+    /*
+        Adding Facts RecyclerView and Adapter
+     */
     private fun setUpRecyclerView() {
         userAdapter = FactsAdapter()
         mViewDataBinding?.rVFacts?.apply {
@@ -45,12 +54,18 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    /*
+        Initialize Data Binding
+     */
     private fun initDataBinding() {
         mViewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         mViewDataBinding?.lifecycleOwner = this
         mViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
     }
 
+    /*
+        Adding LiveData Observers
+     */
     private fun addObservers() {
         mViewModel?.loadingObservable()?.observe(this, { showLoading ->
             mViewDataBinding?.pBFacts?.visibility = if (showLoading) View.VISIBLE else View.GONE
@@ -67,6 +82,9 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
+    /*
+        Show the Error Message
+     */
     private fun showErrorMessage(message: String?) {
         Snackbar.make(findViewById(android.R.id.content), message ?: "", Snackbar.LENGTH_LONG)
             .show()

@@ -7,21 +7,24 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.wiprocodingassessment.views.HomeActivity
 
-class SplashScreenViewModel:ViewModel() {
+class SplashScreenViewModel : ViewModel() {
     init {
-       launchHomeScreen()
+        launchHomeScreen()
     }
 
-    private val navigateToScreen:MutableLiveData<Class<*>> = MutableLiveData()
+    private val navigateToScreen: MutableLiveData<Class<*>> = MutableLiveData()
 
-    fun navigateToScreenObservable():LiveData<Class<*>>{
+    /*
+        @return navigate to screen Observable
+     */
+    fun navigateToScreenObservable(): LiveData<Class<*>> {
         return navigateToScreen
     }
 
     private fun launchHomeScreen() {
         Handler(Looper.getMainLooper()).postDelayed({
             navigateToScreen.value = HomeActivity::class.java
-        },2000L)
+        }, 2000L)
     }
 
 }

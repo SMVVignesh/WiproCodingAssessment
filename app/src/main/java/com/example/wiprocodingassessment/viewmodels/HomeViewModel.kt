@@ -21,24 +21,37 @@ class HomeViewModel : ViewModel() {
         getFacts()
     }
 
+    /*
+          @return Loading Observable
+     */
     fun loadingObservable(): LiveData<Boolean> {
         return loadingLiveData
     }
 
+    /*
+          @return pull to refresh Observable
+     */
     fun pullToRefreshObservable(): LiveData<Boolean> {
         return pullToRefreshLiveData
     }
 
+    /*
+        @return message Observable
+     */
     fun messageObservable(): LiveData<String?> {
         return messageLiveData
     }
 
+    /*
+        @return facts Observable
+     */
     fun factsObservable(): LiveData<FactsModel> {
         return userData
     }
 
-    var count = 0
-
+    /*
+      To Call Fact Api
+     */
     fun getFacts(pullToRefresh: Boolean = false) {
         if (pullToRefresh) {
             pullToRefreshLiveData.value = true

@@ -42,7 +42,9 @@ class FactsAdapter :
         holder.onBind(getItem(holder.adapterPosition))
     }
 
-
+    /*
+           Update the facts list
+     */
     fun updateList(myList: ArrayList<FactsModel.Row?>) {
         submitList(myList)
     }

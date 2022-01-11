@@ -18,7 +18,7 @@ object BaseRetrofit {
         createRetrofit()
     }
 
-   private fun getMyRetrofit(): Retrofit {
+    private fun getMyRetrofit(): Retrofit {
         if (retrofit == null) {
             createRetrofit()
         }
@@ -29,7 +29,9 @@ object BaseRetrofit {
         return getMyRetrofit().create(API::class.java)
     }
 
-
+    /*
+        Create a Retrofit object
+     */
     private fun createRetrofit() {
         retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.API_BASE_URL)
